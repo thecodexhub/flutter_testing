@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_testing/string_validator.dart';
 
 class ValidationTextField extends StatefulWidget {
-  ValidationTextField({
+  const ValidationTextField({
     Key key,
     this.inputDecoration,
     @required this.submitText,
@@ -24,11 +24,11 @@ class ValidationTextField extends StatefulWidget {
 }
 
 class _ValidationTextFieldState extends State<ValidationTextField> {
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   String _value = '';
 
   void _submit() async {
-    bool isValid = widget.stringValidator.isValid(_value);
+    final bool isValid = widget.stringValidator.isValid(_value);
     if (isValid) {
       _focusNode.unfocus();
       widget.onSubmit(_value);
@@ -52,7 +52,7 @@ class _ValidationTextFieldState extends State<ValidationTextField> {
           inputFormatters: [
             widget.inputFormatter,
           ],
-          style: TextStyle(fontSize: 30.0),
+          style: const TextStyle(fontSize: 30.0),
           onChanged: (value) {
             setState(() {
               _value = value;
@@ -60,21 +60,21 @@ class _ValidationTextFieldState extends State<ValidationTextField> {
           },
           onEditingComplete: _submit,
         ),
-        SizedBox(height: 16.0),
+        const SizedBox(height: 16.0),
         _buildButton(),
       ],
     );
   }
 
   Widget _buildButton() {
-    bool _isValid = widget.stringValidator.isValid(_value);
+    final bool _isValid = widget.stringValidator.isValid(_value);
     return SizedBox(
       height: 45.0,
       child: ElevatedButton(
         onPressed: !_isValid ? null : () {},
         child: Text(
           widget.submitText,
-          style: TextStyle(fontSize: 18.0),
+          style: const TextStyle(fontSize: 18.0),
         ),
       ),
     );

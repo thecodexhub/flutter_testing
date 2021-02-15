@@ -1,0 +1,14 @@
+include: package:lint/analysis_options.yaml
+
+linter:
+ rules:
+   - parameter_assignments
+
+analyzer:
+ errors:
+   missing_required_param: error
+   parameter_assignments: error
+   overridden_fields: ignore
+   annotate_overrides: ignore
+   avoid_void_async: ignore
+   avoid_print: ignore

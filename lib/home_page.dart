@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Make a Payment')),
+      appBar: AppBar(title: const Text('Make a Payment')),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ValidationTextField(
-              inputDecoration: InputDecoration(
+              inputDecoration: const InputDecoration(
                   hintText: '\$9.99', hintStyle: TextStyle(fontSize: 30.0)),
               onSubmit: (value) => print(value),
               submitText: 'Submit',

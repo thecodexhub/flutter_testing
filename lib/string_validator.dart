@@ -19,7 +19,7 @@ class RegexValidator implements StringValidator {
       final matches = regex.allMatches(value);
 
       /// Check whether the match is applied for the whole length of String(value)
-      for (Match match in matches) {
+      for (final Match match in matches) {
         if (match.start == 0 && match.end == value.length) {
           return true;
         }
@@ -44,8 +44,8 @@ class ValidatorInputFormatter implements TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    bool oldValueValid = editingValidator.isValid(oldValue.text);
-    bool newValueValid = editingValidator.isValid(newValue.text);
+    final bool oldValueValid = editingValidator.isValid(oldValue.text);
+    final bool newValueValid = editingValidator.isValid(newValue.text);
     // return the oldValue when the newValue becomes invalid
     if (oldValueValid && !newValueValid) {
       return oldValue;
