@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_testing/home_page.dart';
 
 void main() {
+
+  // Submit validation test
   test('Empty amount returns isValid false', () {
     final result = AmountSubmitValidator().isValid('');
     expect(result, false);
