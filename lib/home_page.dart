@@ -37,12 +37,15 @@ class _HomePageState extends State<HomePage> {
           children: [
             ValidationTextField(
               inputDecoration: const InputDecoration(
-                  hintText: '\$9.99', hintStyle: TextStyle(fontSize: 30.0)),
+                hintText: '\$ 9.99',
+                hintStyle: TextStyle(fontSize: 30.0, color: Colors.black45),
+              ),
               onSubmit: (value) => print(value),
               submitText: 'Submit',
               keyboardType: TextInputType.number,
               inputFormatter: ValidatorInputFormatter(
-                  editingValidator: AmountEditingRegexValidator()),
+                editingValidator: AmountEditingRegexValidator(),
+              ),
               stringValidator: AmountSubmitValidator(),
             ),
           ],
