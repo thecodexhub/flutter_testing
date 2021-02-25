@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_testing/home_page.dart';
+import 'package:flutter_testing/make_payment_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
-      home: HomePage(),
+      home: MakePaymentPage(),
     );
   }
 }
