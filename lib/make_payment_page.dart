@@ -19,12 +19,12 @@ class AmountSubmitValidator extends StringValidator {
   }
 }
 
-class HomePage extends StatefulWidget {
+class MakePaymentPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MakePaymentPageState createState() => _MakePaymentPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MakePaymentPageState extends State<MakePaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
