@@ -56,6 +56,7 @@ Current project structure:
   /validation_textfield
 /test
   /amount_validator_test
+  /amount_validator_widget_test
 ```
 
 This is an arbitrary structure. Choose what works best for **your** project.
