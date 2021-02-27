@@ -30,7 +30,7 @@ This project shows how to:
 ### Supported test methods
 
 - [x] Unit test (see [documentation](docs/unit-testing.md))
-- [ ] Widget test
+- [x] Widget test (see [documentation](docs/widget-testing.md))
 - [ ] Integration test
 
 ## Application features
