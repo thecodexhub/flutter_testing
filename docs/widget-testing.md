@@ -1,6 +1,6 @@
 # Widget Test
 
-We have a stateful class `MakePaymentPage` and it has an AppBar and a Column as body that contains a ValidationTextField that checks whether the input string validates certain Regular Expression (here it is a number upto two decimal points) and if it does so the submit button will be enabled.
+We have a stateful class `MakePaymentPage` and it has an AppBar and a `ValidationTextField` that contains a `TextField` and an `ElevatedButton` to check whether the input string validates certain Regular Expression (here it is a number upto two decimal places) and if it does so the submit button (ElevatedButton) will be enabled.
 
 We'll write 3 tests to check if the UI behaves as intended.
 
