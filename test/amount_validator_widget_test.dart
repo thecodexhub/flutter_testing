@@ -15,61 +15,63 @@ void main() {
   // Define a test. The TestWidgets function also provides a WidgetTester
   // to work with. The WidgetTester allows you to build and interact
   // with widgets in the test environment.
-  testWidgets('Make Payment Page has an AppBar title',
-      (WidgetTester tester) async {
-    // Create the widget that has to be tested.
-    // The pumpWidget method form tester builds the widget.
-    await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
-    // Create the finders.
-    // Also you can find a widget with a specific Key or any instance of this widget.
-    final titleFinder = find.text('Make a Payment');
-    // To verify the the text widget appears exactly once
-    // Use `findsOneWidget` matcher
-    expect(titleFinder, findsOneWidget);
-  });
+  group('MakePaymentPage() - ', () {
+    testWidgets('Make Payment Page has an AppBar title',
+        (WidgetTester tester) async {
+      // Create the widget that has to be tested.
+      // The pumpWidget method form tester builds the widget.
+      await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
+      // Create the finders.
+      // Also you can find a widget with a specific Key or any instance of this widget.
+      final titleFinder = find.text('Make a Payment');
+      // To verify the the text widget appears exactly once
+      // Use `findsOneWidget` matcher
+      expect(titleFinder, findsOneWidget);
+    });
 
-  testWidgets(
-      'Add a number to ValidationTextField and check if the submit button is enabled',
-      (WidgetTester tester) async {
-    // Create the widget
-    await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
-    // Enter some value to the ValidationTextField
-    await tester.enterText(find.byType(ValidationTextField), '18.99');
-    // Rebuild the widget after the state has changed.
-    await tester.pump();
-    // Check if submit button is enabled
-    final isEnabled =
-        tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
-    expect(isEnabled, true);
-  });
+    testWidgets(
+        'Add a number to ValidationTextField and the submit button is enabled',
+        (WidgetTester tester) async {
+      // Create the widget
+      await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
+      // Enter some value to the ValidationTextField
+      await tester.enterText(find.byType(ValidationTextField), '18.99');
+      // Rebuild the widget after the state has changed.
+      await tester.pump();
+      // Check if submit button is enabled
+      final isEnabled =
+          tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
+      expect(isEnabled, true);
+    });
 
-  testWidgets(
-      'Add a string to ValidationTextField and check if the submit button is enabled',
-      (WidgetTester tester) async {
-    // Create the widget
-    await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
-    // Enter some value to the ValidationTextField
-    await tester.enterText(find.byType(ValidationTextField), 'The Codex Hub');
-    // Rebuild the widget after the state has changed.
-    await tester.pump();
-    // Check if submit button is enabled
-    final isEnabled =
-        tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
-    expect(isEnabled, false);
-  });
+    testWidgets(
+        'Add a string to ValidationTextField and the submit button is disabled',
+        (WidgetTester tester) async {
+      // Create the widget
+      await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
+      // Enter some value to the ValidationTextField
+      await tester.enterText(find.byType(ValidationTextField), 'The Codex Hub');
+      // Rebuild the widget after the state has changed.
+      await tester.pump();
+      // Check if submit button is enabled
+      final isEnabled =
+          tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
+      expect(isEnabled, false);
+    });
 
-  testWidgets(
-      'Add a number with 3 decimals to ValidationTextField and check if the submit button is enabled',
-      (WidgetTester tester) async {
-    // Create the widget
-    await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
-    // Enter some value to the ValidationTextField
-    await tester.enterText(find.byType(ValidationTextField), '7.476');
-    // Rebuild the widget after the state has changed.
-    await tester.pump();
-    // Check if submit button is enabled
-    final isEnabled =
-        tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
-    expect(isEnabled, false);
+    testWidgets(
+        'Add a number with 3 decimal places to ValidationTextField and the submit button is disabled',
+        (WidgetTester tester) async {
+      // Create the widget
+      await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
+      // Enter some value to the ValidationTextField
+      await tester.enterText(find.byType(ValidationTextField), '7.476');
+      // Rebuild the widget after the state has changed.
+      await tester.pump();
+      // Check if submit button is enabled
+      final isEnabled =
+          tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
+      expect(isEnabled, false);
+    });
   });
 }
