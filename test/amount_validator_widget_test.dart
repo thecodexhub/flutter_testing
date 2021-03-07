@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_testing/make_payment_page.dart';
-import 'package:flutter_testing/validation_textfield.dart';
+import 'package:flutter_testing/common_widgets/validation_textfield.dart';
 
 void main() {
   // If we don't use MaterialApp widget as the ancestor of our tesable widget, We'll get some error like

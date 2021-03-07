@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_testing/string_validator.dart';
-import 'package:flutter_testing/validation_textfield.dart';
+import 'package:flutter_testing/common_widgets/string_validator.dart';
+import 'package:flutter_testing/common_widgets/validation_textfield.dart';
+import 'package:flutter_testing/models/payment_model.dart';
+import 'package:flutter_testing/payment_notifier.dart';
+import 'package:provider/provider.dart';
+
+class NameEditingRegexValidator extends RegexValidator {
+  NameEditingRegexValidator() : super(regexSource: "^[a-zA-Z ,.'-]+\$/i");
+}
+
+class NameSubmitValidator extends StringValidator {
+  @override
+  bool isValid(String value) {
+    try {
+      final name = value.trim();
+      return name.length >= 3;
+    } catch (e) {
+      return false;
+    }
+  }
+}
 
 class AmountEditingRegexValidator extends RegexValidator {
   AmountEditingRegexValidator()
@@ -25,10 +44,43 @@ class MakePaymentPage extends StatefulWidget {
 }
 
 class _MakePaymentPageState extends State<MakePaymentPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _amountFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _nameController?.dispose();
+    _amountController?.dispose();
+    _nameFocusNode?.dispose();
+    _amountFocusNode?.dispose();
+    super.dispose();
+  }
+
+  void _nameSubmit(PaymentNotifier paymentNotifier) async {
+    final bool isValid = NameSubmitValidator().isValid(paymentNotifier.name);
+    if (isValid) {
+      _nameFocusNode.unfocus();
+    } else {
+      FocusScope.of(context).requestFocus(_nameFocusNode);
+    }
+  }
+
+  void _amountSubmit(PaymentNotifier paymentNotifier) async {
+    final bool isValid =
+        AmountSubmitValidator().isValid(paymentNotifier.amount);
+    if (isValid) {
+      _amountFocusNode.unfocus();
+    } else {
+      FocusScope.of(context).requestFocus(_amountFocusNode);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final paymentNotifier = Provider.of<PaymentNotifier>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Make a Payment')),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
@@ -36,19 +88,72 @@ class _MakePaymentPageState extends State<MakePaymentPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ValidationTextField(
+              textEditingController: _nameController,
+              focusNode: _nameFocusNode,
+              inputDecoration: const InputDecoration(
+                hintText: 'Enter name',
+                hintStyle: TextStyle(fontSize: 20.0, color: Colors.black45),
+              ),
+              onChanged: paymentNotifier.updateName,
+              onEditingComplete: () => _nameSubmit(paymentNotifier),
+              keyboardType: TextInputType.text,
+              inputFormatter: ValidatorInputFormatter(
+                editingValidator: NameEditingRegexValidator(),
+              ),
+              stringValidator: NameSubmitValidator(),
+            ),
+            const SizedBox(height: 8.0),
+            ValidationTextField(
+              textEditingController: _amountController,
+              focusNode: _amountFocusNode,
               inputDecoration: const InputDecoration(
                 hintText: '\$ 9.99',
-                hintStyle: TextStyle(fontSize: 30.0, color: Colors.black45),
+                hintStyle: TextStyle(fontSize: 20.0, color: Colors.black45),
               ),
-              onSubmit: (value) => print(value),
-              submitText: 'Submit',
+              onChanged: paymentNotifier.updateAmount,
+              onEditingComplete: () => _amountSubmit(paymentNotifier),
               keyboardType: TextInputType.number,
               inputFormatter: ValidatorInputFormatter(
                 editingValidator: AmountEditingRegexValidator(),
               ),
               stringValidator: AmountSubmitValidator(),
             ),
+            const SizedBox(height: 16.0),
+            _buildButton(),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButton() {
+    final paymentNotifier =
+        Provider.of<PaymentNotifier>(context, listen: false);
+    final bool _isValid =
+        AmountSubmitValidator().isValid(paymentNotifier.amount) &&
+            NameSubmitValidator().isValid(paymentNotifier.name);
+    return SizedBox(
+      height: 45.0,
+      child: ElevatedButton(
+        onPressed: _isValid
+            ? () {
+                _amountFocusNode?.unfocus();
+                _nameFocusNode?.unfocus();
+                paymentNotifier.addPayment(
+                  PaymentModel(
+                    name: paymentNotifier.name,
+                    amount: double.parse(paymentNotifier.amount),
+                    time: DateTime.now(),
+                  ),
+                );
+                paymentNotifier.clearAll();
+                _nameController.clear();
+                _amountController.clear();
+              }
+            : null,
+        child: const Text(
+          'Submit',
+          style: TextStyle(fontSize: 18.0),
         ),
       ),
     );

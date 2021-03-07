@@ -1,49 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_testing/string_validator.dart';
+import 'package:flutter_testing/common_widgets/string_validator.dart';
 
 class ValidationTextField extends StatefulWidget {
   const ValidationTextField({
     Key key,
     this.inputDecoration,
-    @required this.submitText,
+    @required this.textEditingController,
+    @required this.focusNode,
     @required this.keyboardType,
     @required this.inputFormatter,
     @required this.stringValidator,
-    this.onSubmit,
+    this.onEditingComplete,
+    this.onChanged,
   }) : super(key: key);
   final InputDecoration inputDecoration;
-  final String submitText;
+  final TextEditingController textEditingController;
+  final FocusNode focusNode;
   final TextInputType keyboardType;
   final TextInputFormatter inputFormatter;
   final StringValidator stringValidator;
-  final ValueChanged<String> onSubmit;
+  final ValueChanged<String> onChanged;
+  final Function() onEditingComplete;
 
   @override
   _ValidationTextFieldState createState() => _ValidationTextFieldState();
 }
 
 class _ValidationTextFieldState extends State<ValidationTextField> {
-  final FocusNode _focusNode = FocusNode();
-  String _value = '';
-
-  void _submit() async {
-    final bool isValid = widget.stringValidator.isValid(_value);
-    if (isValid) {
-      _focusNode.unfocus();
-      widget.onSubmit(_value);
-    } else {
-      FocusScope.of(context).requestFocus(_focusNode);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
-          focusNode: _focusNode,
+          controller: widget.textEditingController,
+          focusNode: widget.focusNode,
           decoration: widget.inputDecoration,
           keyboardType: widget.keyboardType,
           textAlign: TextAlign.center,
@@ -52,31 +44,11 @@ class _ValidationTextFieldState extends State<ValidationTextField> {
           inputFormatters: [
             widget.inputFormatter,
           ],
-          style: const TextStyle(fontSize: 30.0),
-          onChanged: (value) {
-            setState(() {
-              _value = value;
-            });
-          },
-          onEditingComplete: _submit,
+          style: const TextStyle(fontSize: 20.0),
+          onChanged: widget.onChanged,
+          onEditingComplete: widget.onEditingComplete,
         ),
-        const SizedBox(height: 16.0),
-        _buildButton(),
       ],
-    );
-  }
-
-  Widget _buildButton() {
-    final bool _isValid = widget.stringValidator.isValid(_value);
-    return SizedBox(
-      height: 45.0,
-      child: ElevatedButton(
-        onPressed: !_isValid ? null : () {},
-        child: Text(
-          widget.submitText,
-          style: const TextStyle(fontSize: 18.0),
-        ),
-      ),
     );
   }
 }
