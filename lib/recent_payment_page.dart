@@ -10,6 +10,7 @@ class RecentPaymentPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: paymentNotifier.payments.length,
         itemBuilder: (context, index) => ListTile(
+          key: ValueKey(paymentNotifier.payments[index].name),
           title: Text(
             paymentNotifier.payments[index].name,
           ),

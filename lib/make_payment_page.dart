@@ -88,6 +88,7 @@ class _MakePaymentPageState extends State<MakePaymentPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ValidationTextField(
+              key: const ValueKey('nameField'),
               textEditingController: _nameController,
               focusNode: _nameFocusNode,
               inputDecoration: const InputDecoration(
@@ -104,6 +105,7 @@ class _MakePaymentPageState extends State<MakePaymentPage> {
             ),
             const SizedBox(height: 8.0),
             ValidationTextField(
+              key: const ValueKey('amountField'),
               textEditingController: _amountController,
               focusNode: _amountFocusNode,
               inputDecoration: const InputDecoration(
@@ -135,6 +137,7 @@ class _MakePaymentPageState extends State<MakePaymentPage> {
     return SizedBox(
       height: 45.0,
       child: ElevatedButton(
+        key: const ValueKey('submitButton'),
         onPressed: _isValid
             ? () {
                 _amountFocusNode?.unfocus();

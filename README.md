@@ -38,7 +38,7 @@ This project shows how to:
 
 - [x] Unit test (see [documentation](docs/unit-testing.md))
 - [x] Widget test (see [documentation](docs/widget-testing.md))
-- [ ] Integration test
+- [x] Integration test (see [documentation](docs/integration-testing.md))
 
 ## Application features
 
