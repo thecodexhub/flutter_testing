@@ -1,6 +1,7 @@
 # Flutter Testing demo
 
-This project shows how to implement tests in Flutter 
+This project shows how to implement tests in Flutter
+
 <!-- , using various test methods (unit tests, widget tests, integration tests). -->
 
 ## Project goals
@@ -13,14 +14,20 @@ This project shows how to:
 
 ## Preview
 
-**Unit Test**
-
 <div style="text-align: center"><table><tr>
 <td style="text-align: center">
 <img src="screenshots/ss_one.png" width="200" />
 </td>
 <td style="text-align: center">
 <img src="screenshots/ss_two.png" width="200"/>
+</td>
+</td>
+<td style="text-align: center">
+<img src="screenshots/ss_three.png" width="200"/>
+</td>
+</td>
+<td style="text-align: center">
+<img src="screenshots/ss_four.png" width="200"/>
 </td>
 </tr></table>
 </div>
@@ -39,6 +46,10 @@ This project shows how to:
 
 - [x] Regex validation
 - [x] Custom `TextInputFormatter` for `TextField`
+
+### Recent payment page
+
+- [x] Shows payment history
 
 ## TODO
 
