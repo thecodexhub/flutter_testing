@@ -62,9 +62,17 @@ Current project structure:
 
 ```
 /lib
-  /home_page
-  /string_validator
-  /validation_textfield
+  /bottom_nav_bar
+    /bottom_nav_bar_app
+    /bottom_nav_bar_bloc
+  /common_widgets
+    /string_validator
+    /validation_textfield
+  /models
+    /payment_model
+  /payment_notifier
+  /make_payment_page
+  /recent_payment_page
 /test
   /amount_validator_test
   /amount_validator_widget_test
@@ -80,7 +88,7 @@ Go to your project terminal and run this command to run all the tests in the pro
 foo@bar:~$ flutter test
 ```
 
-## LICENSE
+## License
 
 ```
 Copyright (c) 2021 Sandip Pramanik
