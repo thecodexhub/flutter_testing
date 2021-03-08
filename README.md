@@ -1,8 +1,6 @@
 # Flutter Testing demo
 
-This project shows how to implement tests in Flutter
-
-<!-- , using various test methods (unit tests, widget tests, integration tests). -->
+This project shows how to implement tests in Flutter using various test methods (unit tests, widget tests, integration tests).
 
 ## Project goals
 
@@ -60,23 +58,15 @@ This project shows how to:
 
 Current project structure:
 
-```
-/lib
-  /bottom_nav_bar
-    /bottom_nav_bar_app
-    /bottom_nav_bar_bloc
-  /common_widgets
-    /string_validator
-    /validation_textfield
-  /models
-    /payment_model
-  /payment_notifier
-  /make_payment_page
-  /recent_payment_page
-/test
-  /amount_validator_test
-  /amount_validator_widget_test
-```
+    .
+    ├── lib
+    ├── test                                           # Test files
+    │   ├── amount_validator_test.dart                 # Unit tests
+    │   └── amount_validator_widget_test.dart          # Widget tests
+    ├── test_driver                                ─┐
+    │   ├── app.dart                                │  # Integration tests
+    │   └── app_test.dart                          ─┘ 
+
 
 This is an arbitrary structure. Choose what works best for **your** project.
 
