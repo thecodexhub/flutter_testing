@@ -9,6 +9,24 @@ To write `Integration Test` create a root directory named `test_driver` and it w
 Inside `app.dart` file the following code resides
 
 ```dart
+import 'package:flutter_driver/driver_extension.dart';
+import 'package:flutter_testing/main.dart' as app;
+
+void main() {
+  // This line enables the extension.
+  enableFlutterDriverExtension();
+
+  // Call the `main()` function of the app, or call `runApp` with
+  // any widget you are interested in testing.
+  app.main();
+}
+```
+
+And inside `app_test.dart` we will be having the test methods
+
+Alse there are two functions to be called inside main method `setUpAll()` and `tearDownAll()`
+
+```dart
 FlutterDriver driver;
 
 // Connect to the Flutter driver before running any tests.
@@ -23,23 +41,6 @@ tearDownAll(() async {
   }
 });
 ```
-
-And inside `app_test.dart` we will be having the test methods
-
-Alse there are two functions to be called inside main method `setUpAll()` and `tearDownAll()`
-
-````dart
-import 'package:flutter_driver/driver_extension.dart';
-import 'package:flutter_testing/main.dart' as app;
-
-void main() {
-  // This line enables the extension.
-  enableFlutterDriverExtension();
-
-  // Call the `main()` function of the app, or call `runApp` with
-  // any widget you are interested in testing.
-  app.main();
-}
 
 Sample test:
 
@@ -61,7 +62,7 @@ test('Make a payment', () async {
   await driver.tap(recentPayment);
   await driver.waitFor(find.text('James Williamson'));
 });
-````
+```
 
 ## Run the tests
 
