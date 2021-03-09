@@ -41,14 +41,10 @@ This project shows how to:
 
 ## Application features
 
-### Make payment page
-
 - [x] Regex validation
 - [x] Custom `TextInputFormatter` for `TextField`
-
-### Recent payment page
-
 - [x] Shows payment history
+- [ ] Save history in Local Storage
 
 ## TODO
 
