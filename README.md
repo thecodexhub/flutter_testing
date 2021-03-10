@@ -43,8 +43,8 @@ This project shows how to:
 
 - [x] Regex validation
 - [x] Custom `TextInputFormatter` for `TextField`
-- [x] Shows payment history
-- [ ] Save history in Local Storage
+- [x] Shows recent payment history
+- [x] Save history in Local Storage - [Hive](https://pub.dev/packages/hive)
 
 ## TODO
 
