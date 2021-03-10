@@ -3,6 +3,7 @@ import 'package:flutter_testing/common_widgets/string_validator.dart';
 import 'package:flutter_testing/common_widgets/validation_textfield.dart';
 import 'package:flutter_testing/models/payment_model.dart';
 import 'package:flutter_testing/payment_notifier.dart';
+import 'package:flutter_testing/services/hive_database.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
@@ -78,10 +79,12 @@ class _MakePaymentPageState extends State<MakePaymentPage> {
     }
   }
 
-  void addPaymentDetails(PaymentModel model) {
+  Future<void> addPaymentDetails(PaymentModel model) async {
     // Add payment details in Hive database
-    final historyBox = Hive.box<PaymentModel>('history');
-    historyBox.add(model);
+    // final historyBox = Hive.box<PaymentModel>('history');
+    final database = Provider.of<Database>(context, listen: false);
+    await database.addPayment(model);
+    // historyBox.add(model);
     // Add payment details in state
     final paymentNotifier =
         Provider.of<PaymentNotifier>(context, listen: false);

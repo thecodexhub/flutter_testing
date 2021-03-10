@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_testing/services/hive_database.dart';
 import 'package:hive/hive.dart';
 
 import 'package:flutter_testing/models/payment_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HistoryPaymentPage extends StatefulWidget {
   @override
@@ -16,8 +17,9 @@ class _HistoryPaymentPageState extends State<HistoryPaymentPage> {
   }
 
   Widget _buildContent() {
+    final database = Provider.of<Database>(context, listen: false);
     return ValueListenableBuilder(
-      valueListenable: Hive.box<PaymentModel>('history').listenable(),
+      valueListenable: database.listenablePayments(),
       builder: (context, Box<PaymentModel> historyBox, _) {
         if (historyBox.values.isEmpty) {
           return const Center(child: Text('No Data'));
