@@ -1,6 +1,6 @@
 import 'dart:async';
 
-enum BottomNavBarItem { submit, recent }
+enum BottomNavBarItem { submit, recent, history }
 
 class BottomNavBarBloc {
   final StreamController<BottomNavBarItem> _bottomNavBarController =
@@ -18,6 +18,9 @@ class BottomNavBarBloc {
         break;
       case 1:
         _bottomNavBarController.sink.add(BottomNavBarItem.recent);
+        break;
+      case 2:
+        _bottomNavBarController.sink.add(BottomNavBarItem.history);
         break;
     }
   }

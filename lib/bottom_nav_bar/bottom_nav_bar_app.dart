@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_testing/bottom_nav_bar/bottom_nav_bar_bloc.dart';
-import 'package:flutter_testing/make_payment_page.dart';
-import 'package:flutter_testing/recent_payment_page.dart';
+import 'package:flutter_testing/pages/history_payment_page.dart';
+import 'package:flutter_testing/pages/make_payment_page.dart';
+import 'package:flutter_testing/pages/recent_payment_page.dart';
 
 class BottomNavBarApp extends StatefulWidget {
   @override
@@ -42,6 +43,10 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
           icon: Icon(Icons.details_outlined),
           label: 'Recent',
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.history),
+          label: 'History',
+        ),
       ],
     );
   }
@@ -59,6 +64,9 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
             break;
           case BottomNavBarItem.recent:
             return _recentPaymentArea(item);
+            break;
+          case BottomNavBarItem.history:
+            return _historyPaymentArea(item);
             break;
           default:
             return _submitPaymentArea(item);
@@ -81,6 +89,14 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
       appBar: _buildAppBar('Recent Payment'),
       bottomNavigationBar: _buildBottomNavigationBar(item),
       body: RecentPaymentPage(),
+    );
+  }
+
+  Widget _historyPaymentArea(BottomNavBarItem item) {
+    return Scaffold(
+      appBar: _buildAppBar('Payment History'),
+      bottomNavigationBar: _buildBottomNavigationBar(item),
+      body: HistoryPaymentPage(),
     );
   }
 }

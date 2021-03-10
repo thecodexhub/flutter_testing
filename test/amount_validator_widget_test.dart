@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_testing/make_payment_page.dart';
+import 'package:flutter_testing/pages/make_payment_page.dart';
 import 'package:flutter_testing/common_widgets/validation_textfield.dart';
 
 void main() {

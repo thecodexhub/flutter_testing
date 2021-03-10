@@ -3,6 +3,7 @@ import 'package:flutter_testing/common_widgets/string_validator.dart';
 import 'package:flutter_testing/common_widgets/validation_textfield.dart';
 import 'package:flutter_testing/models/payment_model.dart';
 import 'package:flutter_testing/payment_notifier.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class NameEditingRegexValidator extends RegexValidator {
@@ -77,6 +78,26 @@ class _MakePaymentPageState extends State<MakePaymentPage> {
     }
   }
 
+  void addPaymentDetails(PaymentModel model) {
+    // Add payment details in Hive database
+    final historyBox = Hive.box<PaymentModel>('history');
+    historyBox.add(model);
+    // Add payment details in state
+    final paymentNotifier =
+        Provider.of<PaymentNotifier>(context, listen: false);
+    paymentNotifier.addPayment(model);
+  }
+
+  void clearFields() {
+    final paymentNotifier =
+        Provider.of<PaymentNotifier>(context, listen: false);
+    _amountFocusNode?.unfocus();
+    _nameFocusNode?.unfocus();
+    paymentNotifier.clearAll();
+    _nameController.clear();
+    _amountController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     final paymentNotifier = Provider.of<PaymentNotifier>(context);
@@ -140,18 +161,12 @@ class _MakePaymentPageState extends State<MakePaymentPage> {
         key: const ValueKey('submitButton'),
         onPressed: _isValid
             ? () {
-                _amountFocusNode?.unfocus();
-                _nameFocusNode?.unfocus();
-                paymentNotifier.addPayment(
-                  PaymentModel(
-                    name: paymentNotifier.name,
-                    amount: double.parse(paymentNotifier.amount),
-                    time: DateTime.now(),
-                  ),
-                );
-                paymentNotifier.clearAll();
-                _nameController.clear();
-                _amountController.clear();
+                addPaymentDetails(PaymentModel(
+                  name: paymentNotifier.name,
+                  amount: double.parse(paymentNotifier.amount),
+                  time: DateTime.now(),
+                ));
+                clearFields();
               }
             : null,
         child: const Text(

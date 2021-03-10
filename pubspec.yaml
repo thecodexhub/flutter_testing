@@ -21,9 +21,12 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  cupertino_icons: ^1.0.2
+  hive: ^1.5.0-pre
+  hive_flutter: ^0.3.1
+  path_provider: ^1.6.27
   provider: ^5.0.0
 
 dev_dependencies:
@@ -31,9 +34,9 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  
+  build_runner: ^1.11.5
+  hive_generator: ^0.8.2
   lint: ^1.1.1
-  # mockito: ^5.0.0
   test: ^1.16.5
 
 # For information on the generic Dart part of this file, see the
