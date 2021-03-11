@@ -38,10 +38,4 @@ class _HistoryPaymentPageState extends State<HistoryPaymentPage> {
       },
     );
   }
-
-  @override
-  void dispose() {
-    Hive.close();
-    super.dispose();
-  }
 }

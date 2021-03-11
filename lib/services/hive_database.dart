@@ -12,8 +12,9 @@ abstract class Database {
 
 class HiveDatabase implements Database {
   @override
-  Future<Box<PaymentModel>> openBox() {
-    return Hive.openBox<PaymentModel>('history');
+  Future<Box<PaymentModel>> openBox() async {
+    final result = await Hive.openBox<PaymentModel>('history');
+    return result;
   }
 
   @override
