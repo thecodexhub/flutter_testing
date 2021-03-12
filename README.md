@@ -77,7 +77,7 @@ foo@bar:~$ flutter test
 
 ## License
 
-The project is released under the [MIT License](http://www.opensource.org/licenses/mit-license.php). The license can be found [here](LICENSE).
+The project is released under the [MIT License](http://www.opensource.org/licenses/mit-license.php). The license can be found [here](LICENSE.md).
 
 ## Flutter
 
