@@ -17,4 +17,15 @@ class PaymentModel {
     @required this.amount,
     @required this.time,
   });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PaymentModel &&
+          other.name == name &&
+          other.amount == amount &&
+          other.time == time;
+
+  @override
+  int get hashCode => hashValues(name, amount, time);
 }
