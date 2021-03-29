@@ -7,17 +7,17 @@ We'll write 3 tests to check if the UI behaves as intended.
 Sample Widget test:
 
 ```dart
-testWidgets('Make Payment Page has an AppBar title',
+testWidgets('Description',
     (WidgetTester tester) async {
   // Create the widget that has to be tested.
   // The pumpWidget method form tester builds the widget.
-  await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
+
   // Create the finders.
   // Also you can find a widget with a specific Key or any instance of this widget.
-  final titleFinder = find.text('Make a Payment');
+
   // To verify the the text widget appears exactly once
   // Use `findsOneWidget` matcher
-  expect(titleFinder, findsOneWidget);
+
 });
 ```
 
@@ -25,17 +25,19 @@ testWidgets('Make Payment Page has an AppBar title',
 
 ```dart
 testWidgets(
-    'Add a number to ValidationTextField and check if the submit button is enabled',
+    'Add a number to ValidationTextField and the submit button is enabled',
     (WidgetTester tester) async {
   // Create the widget
   await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
   // Enter some value to the ValidationTextField
-  await tester.enterText(find.byType(ValidationTextField), '18.99');
+  await tester.enterText(
+      find.byKey(const Key('nameField')), 'The Codex Hub');
+  await tester.enterText(find.byKey(const Key('amountField')), '18');
   // Rebuild the widget after the state has changed.
   await tester.pump();
   // Check if submit button is enabled
   final isEnabled =
-      tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
+      tester.widget<ElevatedButton>(find.byKey(const Key('submitButton'))).enabled;
   expect(isEnabled, true);
 });
 ```
@@ -44,17 +46,20 @@ testWidgets(
 
 ```dart
 testWidgets(
-    'Add a string to ValidationTextField and check if the submit button is enabled',
+    'Add a string to ValidationTextField and the submit button is disabled',
     (WidgetTester tester) async {
   // Create the widget
   await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
   // Enter some value to the ValidationTextField
-  await tester.enterText(find.byType(ValidationTextField), 'The Codex Hub');
+  await tester.enterText(
+      find.byKey(const Key('nameField')), 'The Codex Hub');
+  await tester.enterText(
+      find.byKey(const Key('amountField')), 'The Codex Hub');
   // Rebuild the widget after the state has changed.
   await tester.pump();
   // Check if submit button is enabled
   final isEnabled =
-      tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
+      tester.widget<ElevatedButton>(find.byKey(const Key('submitButton'))).enabled;
   expect(isEnabled, false);
 });
 ```
@@ -63,17 +68,19 @@ testWidgets(
 
 ```dart
 testWidgets(
-    'Add a number with 3 decimals to ValidationTextField and check if the submit button is enabled',
+    'Add a number with 3 decimal places to ValidationTextField and the submit button is disabled',
     (WidgetTester tester) async {
   // Create the widget
   await tester.pumpWidget(createTestableWidget(MakePaymentPage()));
   // Enter some value to the ValidationTextField
-  await tester.enterText(find.byType(ValidationTextField), '7.476');
+  await tester.enterText(
+      find.byKey(const Key('nameField')), 'The Codex Hub');
+  await tester.enterText(find.byKey(const Key('amountField')), '7.476');
   // Rebuild the widget after the state has changed.
   await tester.pump();
   // Check if submit button is enabled
   final isEnabled =
-      tester.widget<ElevatedButton>(find.byType(ElevatedButton)).enabled;
+      tester.widget<ElevatedButton>(find.byKey(const Key('submitButton'))).enabled;
   expect(isEnabled, false);
 });
 ```
